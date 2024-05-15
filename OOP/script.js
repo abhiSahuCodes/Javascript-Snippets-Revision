@@ -1,5 +1,5 @@
 'use strict';
-
+// new OPERATOR
 const Person = function (firstName, birthYear) {
     // Instance properties
   this.firstName = firstName;
@@ -38,3 +38,40 @@ console.log(rakesh instanceof Person); // false
 
 
 
+// PROTOTYPES
+
+
+Person.prototype.calcAge = function() {
+    const date = new Date();
+    console.log(date.getFullYear() - this.birthYear);
+}
+
+console.log(Person.prototype);
+
+abhishek.calcAge();
+// if we console.log(abhishek), then there won't be
+// any calcAge but still we can access it as it is
+// prototypal inheritance
+
+rohan.calcAge();
+suhani.calcAge();
+
+console.log(abhishek.__proto__);
+console.log(abhishek.__proto__ === Person.prototype); // true
+
+// But the prototype is not the prototype of Person rather it should
+// be called as like prototypeOfLinkedObjects
+
+console.log(Person.prototype.isPrototypeOf(abhishek)) // true
+console.log(Person.prototype.isPrototypeOf(Person)); //false
+
+
+Person.prototype.species = "Homo sapiens";
+
+console.log(abhishek.species, rohan.species);
+
+// The calcAge, and species are not abhishek's and rohan's own methods, and 
+// properties. These are inherited methods and properties.
+// To check that
+console.log(abhishek.hasOwnProperty('firstName')); // true
+console.log(abhishek.hasOwnProperty('species')); // false
