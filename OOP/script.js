@@ -1,5 +1,5 @@
 'use strict';
-// new OPERATOR
+// ----------------- new OPERATOR -----------------
 const Person = function (firstName, birthYear) {
     // Instance properties
   this.firstName = firstName;
@@ -38,7 +38,7 @@ console.log(rakesh instanceof Person); // false
 
 
 
-// PROTOTYPES
+//----------------- PROTOTYPES -----------------
 
 
 Person.prototype.calcAge = function() {
@@ -145,5 +145,3 @@ function sum(a, b) {
   return a + b;
 }
 console.dir(sum);
-
-

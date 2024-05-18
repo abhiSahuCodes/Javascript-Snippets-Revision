@@ -12,7 +12,7 @@ DATA CAR 2: 'Mercedes' going at 95 km/h
 
 */
 
-/* This can work but not recommended */
+/* This can work but not recommended as it will be terrible for performance */
 
 // const Car = function(make, speed) {
 //     this.make = make;
