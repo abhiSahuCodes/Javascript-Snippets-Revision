@@ -19,8 +19,8 @@ const bikeCl = class {
 // Class declaration
 
 class PersonCl {
-  constructor(firstName, birthYear) {
-    this.firstName = firstName;
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
     this.birthYear = birthYear;
   }
 
@@ -32,13 +32,34 @@ class PersonCl {
   }
 
   greet() {
-    console.log(`Hey ${this.firstName}`);
+    console.log(`Hey ${this.fullName}`);
   }
+
+  get age() {
+    return new Date().getFullYear() - this.birthYear;
+  }
+
+  // Set a property that already exists
+  set fullName(name) {
+    console.log(name)
+      if (name.includes(" ")) {
+        this._fullName = name;
+      } else {
+        console.log(`${name} is not a full name`);
+      }
+  }
+
+  get fullName() {
+    return this._fullName;
+  } 
 }
 
 const dhoni = new PersonCl('Mahendra Singh Dhoni', 1981);
 console.log(dhoni);
-dhoni.calcAge();
+dhoni.calcAge(); // 43
+
+// getters
+console.log(dhoni.age); // 43
 
 console.log(dhoni.__proto__ === PersonCl.prototype); // true
 
@@ -70,3 +91,30 @@ dhoni.greet();
 */
 
 
+// ----------------- GETTERS/SETTERS -----------------
+
+/*
+These are methods but can be used as properties.
+*/
+
+const rohan = new PersonCl("Rohan Singh", 2000);
+
+const account = {
+    owner: 'Abhishek',
+    movements: [700, 540, 120, 300],
+
+    get latest() {
+        return this.movements.slice(-1).pop();
+    },
+
+    set latest(mov) {
+        this.movements.push(mov);
+    }
+};
+
+console.log(account.latest); // 300
+
+account.latest = 50;
+console.log(account.movements);
+
+// These are also used in class body.... Including those in the personCl class.
