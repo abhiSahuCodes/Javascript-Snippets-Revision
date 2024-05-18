@@ -23,7 +23,7 @@ class PersonCl {
     this.fullName = fullName;
     this.birthYear = birthYear;
   }
-
+  // INSTANCE METHODS - instances can inherit these
   // Methods - It will be inside the prototype not in new instance created - Recommended here
   calcAge() {
     const date = new Date();
@@ -52,11 +52,20 @@ class PersonCl {
   get fullName() {
     return this._fullName;
   } 
+
+  // STATIC METHODS - It will be inside the constructor not in new instance created
+  static hey() {
+    console.log('Hey there')
+  }
+
 }
 
 const dhoni = new PersonCl('Mahendra Singh Dhoni', 1981);
 console.log(dhoni);
 dhoni.calcAge(); // 43
+
+// Static methods can be called without creating an instance
+PersonCl.hey(); // Hey there
 
 // getters
 console.log(dhoni.age); // 43
@@ -118,3 +127,40 @@ account.latest = 50;
 console.log(account.movements);
 
 // These are also used in class body.... Including those in the personCl class.
+
+
+// ---------------------STATIC METHODS-----------------------
+
+
+/*
+Array.from() is a method that creates a new, shallow-copied Array instance from 
+an array-like or iterable object.
+This method is in the Array constructor not in the Array.prototype.
+So, arrays cannot inherit this by default.
+
+[2, 3, 5].from() will give error saying it is not a function.
+Same as Number.parseFloat().
+
+So, these are static methods present in Array and Number constructor.
+*/
+
+const Table = function(material) {
+    this.material = material;
+}
+
+const table1 = new Table('wood');
+
+Table.color = function(color) {
+    console.log(`The table is ${color}.`);
+    console.log(this) // ƒ (material) { this.material = material; }
+}
+
+// As Table is calling the color function so Table will be this inside the color function
+
+Table.color('blue'); // The table is blue.
+
+console.log(table1.material); // wood
+
+// table1.color(); // The table1.color is not a function.
+
+// IN PersonCl the static method is used above and called.
