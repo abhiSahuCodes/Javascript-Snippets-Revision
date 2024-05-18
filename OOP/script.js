@@ -75,3 +75,38 @@ console.log(abhishek.species, rohan.species);
 // To check that
 console.log(abhishek.hasOwnProperty('firstName')); // true
 console.log(abhishek.hasOwnProperty('species')); // false
+
+
+// Prototypal Inheritance and The Prototype Chain
+
+/* Person.prototype is not the prototype of Person rather it is the prototype of
+the object created though  Person like abhishek, suhani and rakesh. */
+
+/*
+Constructor function i.e [Person()] is used to create [abhishek] object.
+Person.prototype is assigned a function calcAge() and it becomes prototype of 
+[abhishek] object. So, abhishek.__proto__ = Person.prototype. 
+And Person.prototype has a constructor function which is [Person()].
+
+But Person.prototype is not the top part of the prototype chain.
+
+Person.__proto__ = Object.prototype;
+Object.prototype has a constructor function which is [Object()].
+This [Object()] is the built in constructor function for objects. 
+This is used when we write an object literal like {...} = new Object(...).
+As Object.prototype is the top part of the prototype chain, it's prototype is null.
+So, Object.prototype.__proto__ = null.
+
+Prototype Chain: Series of links between objects, linked through prototypes.
+
+abhishek.hasOwnProperty('firstName')-> here we check if abhishek has no method such as
+hasOwnProperty. So, javascript will look into Person.prototype, it will not find
+there as it is not there. So, it will look into Object.prototype and it will find 
+there and this abhishek.hasOwnProperty('firstName') will be possible to call as 
+this method will be inherited to abhishek (not copied).
+
+*/
+
+console.log(abhishek.__proto__); // Person.prototype
+console.log(abhishek.__proto__.__proto__); // Object.prototype
+console.log(abhishek.__proto__.__proto__.__proto__); // null
