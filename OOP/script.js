@@ -77,7 +77,7 @@ console.log(abhishek.hasOwnProperty('firstName')); // true
 console.log(abhishek.hasOwnProperty('species')); // false
 
 
-// Prototypal Inheritance and The Prototype Chain
+// // PROTOTYPAL INHERITANCE AND CHAINING
 
 /* Person.prototype is not the prototype of Person rather it is the prototype of
 the object created though  Person like abhishek, suhani and rakesh. */
@@ -110,3 +110,40 @@ this method will be inherited to abhishek (not copied).
 console.log(abhishek.__proto__); // Person.prototype
 console.log(abhishek.__proto__.__proto__); // Object.prototype
 console.log(abhishek.__proto__.__proto__.__proto__); // null
+
+console.dir(Person.prototype.constructor);
+
+// Same with arrays
+
+const arr = [2, 3, 4, 5, 3, 6, 5, 7]; // This is same as new Array(2, 3, 4, 5, 3, 6, 5, 7])
+
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype); // true
+console.log(arr.__proto__.__proto__); // Object.prototype
+console.log(arr.__proto__.__proto__.__proto__); // null
+
+
+// Creating prototype method
+Array.prototype.unique = function() {
+  return [...new Set(this)];
+}
+
+console.log(arr.unique()); // [2, 3, 4, 5, 6, 7]
+
+const h1 = document.querySelector('h1');
+
+console.log(h1.__proto__); // HTMLHeadingElement {...}
+console.log(h1.__proto__.__proto__); // HTMLElement {...}
+console.log(h1.__proto__.__proto__.__proto__); // Element {...}
+console.log(h1.__proto__.__proto__.__proto__.__proto__); // Node {...}
+
+// Node has a [[prototype]]: EventTarget {...} and EventTarget has a [[prototype]]: Object {...}
+
+// For function 
+
+function sum(a, b) {
+  return a + b;
+}
+console.dir(sum);
+
+
