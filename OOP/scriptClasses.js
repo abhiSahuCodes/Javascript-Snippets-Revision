@@ -164,3 +164,5 @@ console.log(table1.material); // wood
 // table1.color(); // The table1.color is not a function.
 
 // IN PersonCl the static method is used above and called.
+
+
