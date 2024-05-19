@@ -34,10 +34,12 @@ class Account {
 
     deposit(val) {
         this.#movements.push(val);
+        return this;
     }
 
     withdraw(val) {
         this.deposit(-val);
+        return this;
     }
 
     // _approveLoan(val) {
@@ -48,6 +50,7 @@ class Account {
         if (this.#approveLoan(val)) {
             this.deposit(val);
             console.log(`Loan approved.`)
+            return this;
         }
     }
 
@@ -92,3 +95,13 @@ console.log(acc1);
 
 Account.helper(); // Helper
 // acc1.helper(); // acc1.helper is not a function.
+
+
+
+// CHAINING METHODS
+
+// acc1.deposit here won't work, we need to return this in deposit function. Then in all functions.
+acc1.deposit(30000).deposit(50000).withdraw(20000).requestLoan(70000).withdraw(35000);
+
+console.log(acc1);
+console.log(acc1.getMovements());
