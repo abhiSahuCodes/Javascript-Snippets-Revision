@@ -7,16 +7,16 @@
 // There is also the static version 
 
 class Account {
-    // 1) Public fields
+    // 1) Public fields - not unique and available and same for all instances
     locale = navigator.language;
     // _movements = [];
 
-    // 2) Private Fields
+    // 2) Private Fields - not unique and not available outside of class
     #movements = [];
     #pin;
     constructor(owner, currency, pin) {
-        this.owner = owner;
-        this.currency = currency;
+        this.owner = owner; // unique and available to all instances but not same
+        this.currency = currency; 
         // Protect property - just a convention to not touch it
         this.#pin = pin;
         // this._movements = [];
