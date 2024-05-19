@@ -1,39 +1,64 @@
+
+// 1) Public Fields - to be available to all instances
+// 2) Private Fields
+// 3) Public Methods
+// 4) Private Methods
+
+// There is also the static version 
+
 class Account {
+    // 1) Public fields
+    locale = navigator.language;
+    // _movements = [];
+
+    // 2) Private Fields
+    #movements = [];
+    #pin;
     constructor(owner, currency, pin) {
         this.owner = owner;
         this.currency = currency;
         // Protect property - just a convention to not touch it
-        this._pin = pin;
-        this._movements = [];
+        this.#pin = pin;
+        // this._movements = [];
 
         this.locale = navigator.language;
 
         console.log(`Thanks for opening an account, ${this.owner}.`)
     }
 
-    // Public interface
+    // Public interface / 3) Public Methods 
 
     getMovements() {
-        return this._movements;
+        return this.#movements;
     }
 
     deposit(val) {
-        this._movements.push(val);
+        this.#movements.push(val);
     }
 
     withdraw(val) {
         this.deposit(-val);
     }
 
-    _approveLoan(val) {
-        return true;
-    }
+    // _approveLoan(val) {
+    //     return true;
+    // }
 
     requestLoan(val) {
-        if (this._approveLoan(val)) {
+        if (this.#approveLoan(val)) {
             this.deposit(val);
             console.log(`Loan approved.`)
         }
+    }
+
+    // 4) Private Methods - this will be inside [[PrivateMethods]] 
+    #approveLoan(val) {
+        return true;
+    }
+
+    // Static - only accessible by the class not it's instances
+    static helper() {
+        console.log('Helper')
     }
 }
 
@@ -57,3 +82,13 @@ acc1.requestLoan(10000);
 // acc1.approveLoan(2000); // It is not a function
 
 console.log(acc1);
+// console.log(acc1.movements); // undefined
+// console.log(acc1.#movements); // Property '#movements' is not accessible outside class 'Account' because it has a private identifier.
+
+// console.log(acc1.pin); // undefined
+// console.log(acc1.#pin); // Property '#pin' is not accessible outside class 'Account' because it has a private identifier.
+
+// console.log(acc1.#approveLoan(1000)); // Property '#approveLoan' is not accessible outside class 'Account' because it has a private identifier.
+
+Account.helper(); // Helper
+// acc1.helper(); // acc1.helper is not a function.
