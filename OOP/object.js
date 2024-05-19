@@ -10,13 +10,6 @@ the object need to be set using the object literal syntax.
 
 */
 
-
-
-
-
-
-
-
 const PersonProto = {
     calcAge() {
         console.log(new Date().getFullYear() - this.birthYear);

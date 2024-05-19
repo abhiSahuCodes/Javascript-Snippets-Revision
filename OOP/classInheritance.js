@@ -68,8 +68,9 @@ rohan.calcAge();
 // Testing the inheritance chain
 
 console.log(rohan.__proto__);
-/* Has only introduce: f() and [[prototype]]: Object.. No constructor (as Object.create made a new object where no constructor is defined while linking prototypes) It points towards Person not Student but has the 
-introduce function. 
+/* Has only introduce: f() and [[prototype]]: Object.. 
+No constructor (as Object.create made a new object where no constructor is defined while linking prototypes) 
+It points towards Person not Student but has the introduce function. 
 */
 console.log(rohan.__proto__.__proto__);
 // Has calcAge: f(), constructor, and [[prototype]]: Object
@@ -136,9 +137,9 @@ class StudentCl extends PersonCl {
     this.course = course;
   }
 
-  introduce () {
+  introduce() {
     console.log(`My name is ${this.fullName} and I study ${this.course}.`);
-  };
+  }
 
   // If calcAge is defined here it will override the previous one
   // This comes first in prototype chain that is in Student.prototype
@@ -157,3 +158,37 @@ ronak.calcAge();
 console.log(ronak.__proto__); // StudentCl.prototype // has introduce
 console.log(ronak.__proto__.__proto__); // PersonCl.prototype // has calcAge
 
+// -----------------INHERITANCE BETWEEN CLASSES: Object.create()---------------
+
+const PersonProto = {
+  calcAge() {
+    console.log(new Date().getFullYear() - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+
+const rohit = Object.create(PersonProto);
+
+console.log(rohit); // {}
+
+const StudentProto = Object.create(PersonProto);
+
+StudentProto.init = function(firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+}
+
+StudentProto.introduce = function() {
+  console.log(`My name is ${this.firstName} and I study ${this.course}.`);
+}
+
+const Jitendra = Object.create(StudentProto);
+
+Jitendra.init('Jitendra', 1991, "Biology");
+Jitendra.introduce();
+Jitendra.calcAge();
