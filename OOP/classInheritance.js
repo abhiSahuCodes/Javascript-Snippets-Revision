@@ -63,15 +63,15 @@ This will set them equal and the prototype of new instance of Student and new in
 */
 
 // Calling calcAge for rohan
-rohan.calcAge(); 
+rohan.calcAge();
 
 // Testing the inheritance chain
 
-console.log(rohan.__proto__); 
+console.log(rohan.__proto__);
 /* Has only introduce: f() and [[prototype]]: Object.. No constructor (as Object.create made a new object where no constructor is defined while linking prototypes) It points towards Person not Student but has the 
 introduce function. 
 */
-console.log(rohan.__proto__.__proto__); 
+console.log(rohan.__proto__.__proto__);
 // Has calcAge: f(), constructor, and [[prototype]]: Object
 
 console.log(rohan instanceof Student); // true
@@ -83,7 +83,77 @@ To explicitly set constructor in rohan.__proto__ i.e. Student.prototype,
 Do this:
 */
 
-Student.prototype.constructor = Student; 
+Student.prototype.constructor = Student;
 
+// -----------------INHERITANCE BETWEEN CLASSES: ES6 CLASSES---------------
 
+// Using the same PersonCl of scriptClasses.js
+
+class PersonCl {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  calcAge() {
+    const date = new Date();
+    const year = date.getFullYear();
+    console.log(year - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.fullName}`);
+  }
+
+  get age() {
+    return new Date().getFullYear() - this.birthYear;
+  }
+
+  set fullName(name) {
+    if (name.includes(' ')) {
+      this._fullName = name;
+    } else {
+      console.log(`${name} is not a full name`);
+    }
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  static hey() {
+    console.log('Hey there');
+  }
+}
+
+// For StudentCl class to inherit from PersonCl class we use extends
+// For the constructor of StudentCl to get constructor of PersonCl we use super()
+
+class StudentCl extends PersonCl {
+  constructor(fullName, birthYear, course) {
+    // Always needs to happen first - to access this
+    super(fullName, birthYear);
+    this.course = course;
+  }
+
+  introduce () {
+    console.log(`My name is ${this.fullName} and I study ${this.course}.`);
+  };
+
+  // If calcAge is defined here it will override the previous one
+  // This comes first in prototype chain that is in Student.prototype
+  calcAge() {
+    const date = new Date();
+    const year = date.getFullYear();
+    console.log(`I am ${year - this.birthYear} years old.`);
+  }
+}
+
+const ronak = new StudentCl('Ronak Pradhan', 2001, 'Biology');
+console.log(ronak);
+
+ronak.introduce();
+ronak.calcAge();
+console.log(ronak.__proto__); // StudentCl.prototype // has introduce
+console.log(ronak.__proto__.__proto__); // PersonCl.prototype // has calcAge
 
