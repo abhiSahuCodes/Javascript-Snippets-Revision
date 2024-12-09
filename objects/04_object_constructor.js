@@ -54,3 +54,55 @@ console.log(car["model"])   // Output: "Hyryder"
 console.log(car["brand"])   // Output: "Toyota"
 console.log(car[property]); // Output: "Hyryder"
 
+
+// ~ Pre-defined Objects with object Constructor
+
+const rectangle = new Object({
+    length: 10,
+    width: 5,
+    area: function () {
+        return this.length * this.width
+    }
+})
+
+console.log(rectangle.area()) // Output: 50
+
+// & ----------------- Advantages of the object Constructor -----------------
+
+/*
+^ Dynamic Creation:
+    Ideal for creating objects when keys and values are determined during runtime.
+
+^ Flexibility:
+    Allows adding or removing properties and methods dynamically. 
+
+*/
+
+
+// & ----------------- Modern Usage -----------------
+
+/*
+While the Object constructor works fine, object literals are generally preferred for simplicity and readability. 
+The Object constructor is mostly used in advanced scenarios or for compatibility purposes.
+
+*/
+
+
+// ~ Using Object Constructor
+const obj1 = new Object();
+obj1.name = "John";
+
+// ~ Using Object Literal
+const obj2 = { name: "John" }; // Cleaner and shorter
+
+
+// & ----------------- Summary -----------------
+
+/*
+The Object constructor provides a programmatic way to create objects.
+
+Properties and methods are added dynamically.
+
+It's less common now, as object literals are simpler and more concise.
+
+*/
