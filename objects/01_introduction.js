@@ -110,8 +110,10 @@ const userData = {
 
 console.log(userData.address.city); // Output: New York
 
+
+// & ----------------- Summary -----------------
+
 /*
-Recap
 ^ Definition: 
     Objects are key-value pairs; keys are properties, values can be anything.
 ^ Purpose: 
