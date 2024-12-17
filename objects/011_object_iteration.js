@@ -1,6 +1,6 @@
 // ^ +++++++++++++++++++++++++++++++++ OBJECT ITERATION ++++++++++++++++++++++++++++++++
 
-// & ----------------- Case -----------------
+// & ----------------- for...in -----------------
 
 /*
 The for...in loop is used to iterate over the enumerable properties of an object. 
@@ -174,4 +174,8 @@ Use for...in when:
   - You need to include only enumerable properties. 
 
 */
+
+
+
+
 
