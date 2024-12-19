@@ -175,3 +175,6 @@ function displayUserInfo(user) {
 const userInfo = { name: "Rajesh", country: "India" };
 displayUserInfo(userInfo);
 // Output: Name: Rajesh, Age: Unknown, Country: India
+
+
+
