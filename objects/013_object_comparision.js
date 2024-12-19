@@ -100,3 +100,14 @@ const obj13 = {};
 console.log(obj12 === obj13); // false
 
 
+// ~ Practical Use
+
+const userCache = new Map();
+const user = { id: 1, name: "Rohan" };
+userCache.set(user, "cached");
+
+console.log(userCache.has(user)); // true
+console.log(userCache.has({ id: 1, name: "Rohan" })); // false (different objects)
+
+
+
