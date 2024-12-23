@@ -1,4 +1,4 @@
-//^ ++++++++++++++++++++++++++++++++++++++++ INTRODUCTION ++++++++++++++++++++++++++++++++++++++++
+//^ ++++++++++++++++++++++++++++++++++++++++ PROMISES ++++++++++++++++++++++++++++++++++++++++
 
 /*
 A Promise is a JavaScript object that represents the result of an asynchronous operation. 
@@ -52,6 +52,13 @@ promise
   });
 
 /*
+Output:
+  Fulfilled: Operation succeeded!
+  Promise settled (fulfilled or rejected).
+
+*/
+
+/*
 ^ Explanation:
 A new promise is created using the Promise constructor.
 It takes a function (called the executor) as an argument.
@@ -95,6 +102,13 @@ fetchUserData
     console.log("Fetch operation complete.");
   });
 
+/*
+Output:
+    User fetched: { id: 1, name: 'Alice' }
+    Fetch operation complete.
+
+*/
+
 // ~ Fetching Data with Promises (Actual Use)
 
 const fetchTodo = new Promise((resolve, reject) => {
@@ -122,3 +136,11 @@ fetchTodo
   .finally(() => {
     console.log("Fetch operation complete.");
   });
+
+/*
+Output:
+    Fetched Todo: { userId: 1, id: 1, title: 'delectus aut autem', completed: false }
+    Fetch operation complete.  
+
+*/
+
