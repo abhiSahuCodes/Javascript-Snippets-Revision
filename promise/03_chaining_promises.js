@@ -15,7 +15,7 @@ Handle errors centrally in the chain using .catch().
 
 */
 
-// Basics of chaining promises
+// & -------------------- Basics of chaining promises --------------------
 
 new Promise((resolve, reject) => {
   resolve(1); // Start with the value 1
@@ -34,3 +34,13 @@ new Promise((resolve, reject) => {
   .catch((error) => {
     console.error("Error:", error);
   });
+
+
+/*
+^ How It Works:
+
+The first .then() receives the resolved value 1, processes it, and returns 2.
+The second .then() receives 2, processes it, and returns 6.
+The chain continues until all .then() methods are resolved or an error occurs.
+
+*/
