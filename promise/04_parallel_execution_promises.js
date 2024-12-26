@@ -112,3 +112,46 @@ Output:
 */
 
 // Unlike Promise.all, it doesn't stop when a promise fails. Results include both successful and failed promises.
+
+// & -------------------- Example: Promise.race --------------------
+
+// Handling the First Settled Promise
+
+const fetchSlow = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("Slow operation completed");
+      resolve("Slow Result");
+    }, 3000); // Simulate 3-second delay
+  });
+};
+
+const fetchFast = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("Fast operation completed");
+      resolve("Fast Result");
+    }, 1000); // Simulate 1-second delay
+  });
+};
+
+Promise.race([fetchSlow(), fetchFast()])
+  .then((result) => {
+    console.log("Race winner:", result);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+
+/*
+Output:
+    Fast operation completed
+    Race winner: Fast Result
+
+    Slow operation completed (This comes after a delay)
+
+*/
+
+// Only the fastest promise (fetchFast) resolves. The slower promise (fetchSlow) is ignored.
+
+
