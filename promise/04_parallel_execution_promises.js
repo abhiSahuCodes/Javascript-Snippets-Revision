@@ -155,3 +155,56 @@ Output:
 // Only the fastest promise (fetchFast) resolves. The slower promise (fetchSlow) is ignored.
 
 
+
+// & -------------------- Example: Fetching Multiple APIs --------------------
+
+const fetchUserData = () =>
+  fetch("https://dummyapi.online/api/users/1").then((res) => res.json());
+
+const fetchTodoData = () =>
+  fetch("https://jsonplaceholder.typicode.com/todos/1").then((res) =>
+    res.json()
+  );
+
+Promise.all([fetchUserData(), fetchTodoData()])
+  .then(([user, todo]) => {
+    console.log("User Data:", user);
+    console.log("Todo Data:", todo);
+  })
+  .catch((error) => {
+    console.error("Error fetching data:", error);
+  });
+
+
+/*
+Output:
+
+User Data: {
+  id: 1,
+  name: 'John Doe',
+  username: 'johndoe',
+  email: 'johndoe@example.com',
+  address: {
+    street: '123 Main St',     
+    city: 'San Francisco',     
+    state: 'CA',
+    zipcode: '94111'
+  }
+}
+
+Todo Data: { userId: 1, id: 1, title: 'delectus aut autem', completed: false }
+
+*/
+
+
+// & ------------------- When to Use Each Method --------------------
+
+/*
+^ Promise.all: 
+    When all promises must succeed for the operation to proceed.
+^ Promise.allSettled: 
+    When you need results from all promises, regardless of success or failure.
+^ Promise.race: 
+    When only the fastest promise matters.
+
+*/
