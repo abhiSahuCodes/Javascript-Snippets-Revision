@@ -60,9 +60,55 @@ Promise.all([fetchUser(), fetchOrders()])
 Output:
     Fetched User Data
     Fetched Orders Data
-    
+
     User: { id: 1, name: 'Rohan' }
     Orders: [ { orderId: 1, item: 'Laptop' }, { orderId: 2, item: 'Smartphone' } ]
 
 
 */
+
+// Both operations start simultaneously. The results are available when the slower operation (fetchOrders) finishes.
+
+// & -------------------- Example: Promise.allSettled --------------------
+
+// Handle Success and Failures Together
+
+const fetchUserInfo = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log("Fetched User Data");
+      resolve({ id: 1, name: "Rohan" });
+    }, 1000);
+  });
+};
+
+const fetchOrdersInfo = () => {
+  return new Promise((_, reject) => {
+    setTimeout(() => {
+      console.error("Failed to fetch orders");
+      reject("Orders API failed");
+    }, 2000);
+  });
+};
+
+Promise.allSettled([fetchUserInfo(), fetchOrdersInfo()]).then((results) => {
+  results.forEach((result, index) => {
+    if (result.status === "fulfilled") {
+      console.log(`Promise ${index + 1} fulfilled:`, result.value);
+    } else {
+      console.log(`Promise ${index + 1} rejected:`, result.reason);
+    }
+  });
+});
+
+/*
+Output:
+
+    Fetched User Data
+    Failed to fetch orders - This is error message from fetchOrdersInfo function
+    Promise 1 fulfilled: { id: 1, name: 'Rohan' }
+    Promise 2 rejected: Orders API failed
+
+*/
+
+// Unlike Promise.all, it doesn't stop when a promise fails. Results include both successful and failed promises.
