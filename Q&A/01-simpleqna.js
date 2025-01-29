@@ -265,5 +265,56 @@ But in Promise.allSettled, we get:
   { status: "rejected", reason: "User not found!" } // This happens if a user is missing
 ]
 
-
 */
+
+/*
+Question 9:
+You are given an array of objects representing users, and you need to group them by their city. Each user has a name and city property. 
+Write a function groupByCity(users) that groups users by city and returns an object where the keys are the city names and the values are arrays of user names in that city.
+
+Output: 
+{
+  New York: ['John', 'Peter'],
+  London: ['Jane', 'Sarah'],
+  Paris: ['Paul']
+}
+*/
+
+const cityUsers = [
+  { name: "John", city: "New York" },
+  { name: "Jane", city: "London" },
+  { name: "Peter", city: "New York" },
+  { name: "Sarah", city: "London" },
+  { name: "Paul", city: "Paris" },
+];
+
+function groupByCity(users) {
+  const namesInCity = {};
+
+  for (let i = 0; i < users.length; i++) {
+    let user = users[i];
+
+    if (!namesInCity[user.city]) {
+      namesInCity[user.city] = [];
+    }
+
+    namesInCity[user.city].push(user.name);
+  }
+  return namesInCity;
+}
+
+console.log(groupByCity(cityUsers));
+
+//OR
+
+function groupByCity(users) {
+  return users.reduce((acc, user) => {
+    if (!acc[user.city]) {
+      acc[user.city] = [];
+    }
+    acc[user.city].push(user.name);
+    return acc;
+  }, {});
+}
+
+console.log(groupByCity(cityUsers));
