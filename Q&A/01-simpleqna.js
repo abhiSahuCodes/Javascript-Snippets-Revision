@@ -305,7 +305,7 @@ function groupByCity(users) {
 
 console.log(groupByCity(cityUsers));
 
-//OR
+// OR
 
 function groupByCity(users) {
   return users.reduce((acc, user) => {
@@ -318,3 +318,57 @@ function groupByCity(users) {
 }
 
 console.log(groupByCity(cityUsers));
+
+/*
+Question 10.
+You need to write a function that removes duplicate objects from an array based on a specific key.
+
+Write a function removeDuplicates(arr, key) that takes an array of objects and a key to check for uniqueness. 
+The function should return a new array with duplicate objects (based on the given key) removed, keeping only the first occurrence.
+
+Expected Output:
+[
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+  { id: 3, name: 'Charlie' }
+]
+
+*/
+
+const duplicatedUsers = [
+  { id: 1, name: "Alice" },
+  { id: 2, name: "Bob" },
+  { id: 1, name: "Alice" },
+  { id: 3, name: "Charlie" },
+  { id: 2, name: "Bob" },
+];
+
+function removeDuplicates(arr, key) {
+  let result = {};
+
+  return arr.filter((item) => {
+    if (result[item[key]]) {
+      return false;
+    }
+    result[item[key]] = true;
+    return true;
+  });
+}
+
+console.log(removeDuplicates(duplicatedUsers, "id"));
+
+// OR
+
+function removeDuplicates(arr, key) {
+  let result = new Set();
+
+  return arr.filter((item) => {
+    if (result.has(item[key])) {
+      return false;
+    }
+    result.add(item[key]);
+    return true;
+  });
+}
+
+console.log(removeDuplicates(duplicatedUsers, "id"));
