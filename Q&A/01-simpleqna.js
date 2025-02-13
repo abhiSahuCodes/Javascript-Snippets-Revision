@@ -372,3 +372,57 @@ function removeDuplicates(arr, key) {
 }
 
 console.log(removeDuplicates(duplicatedUsers, "id"));
+
+
+/*
+Question 11.
+You have an array of objects representing tasks. Each task has a name, status (either "pending", "completed", or "in-progress"), 
+and priority (a number, where lower is higher priority).
+
+Write a function sortAndGroupTasks(tasks) that does the following:
+
+1. Groups tasks by their status.
+2. Sorts tasks within each group by priority (ascending).
+
+const tasks = [
+  { name: "Task 1", status: "pending", priority: 3 },
+  { name: "Task 2", status: "completed", priority: 2 },
+  { name: "Task 3", status: "in-progress", priority: 1 },
+  { name: "Task 4", status: "pending", priority: 1 },
+  { name: "Task 5", status: "completed", priority: 1 },
+  { name: "Task 6", status: "in-progress", priority: 2 }
+];
+
+console.log(sortAndGroupTasks(tasks));
+
+*/
+
+function sortAndGroupTasks(tasks) {
+  const groupedTasks = {};
+
+  // Grouping tasks by status
+  tasks.forEach((task) => {
+    if (!groupedTasks[task.status]) {
+      groupedTasks[task.status] = [];
+    }
+    groupedTasks[task.status].push(task);
+  });
+
+  // Sorting each group by priority (ascending)
+  for (const status in groupedTasks) {
+    groupedTasks[status].sort((a, b) => a.priority - b.priority);
+  }
+
+  return groupedTasks;
+}
+
+const tasks = [
+  { name: "Task 1", status: "pending", priority: 3 },
+  { name: "Task 2", status: "completed", priority: 2 },
+  { name: "Task 3", status: "in-progress", priority: 1 },
+  { name: "Task 4", status: "pending", priority: 1 },
+  { name: "Task 5", status: "completed", priority: 1 },
+  { name: "Task 6", status: "in-progress", priority: 2 },
+];
+
+console.log(sortAndGroupTasks(tasks));
