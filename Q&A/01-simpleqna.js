@@ -446,3 +446,29 @@ function sortAndGroupTasks(tasks) {
 }
 
 console.log(sortAndGroupTasks(tasks));
+
+
+// OR
+
+function sortAndGroupTasks(tasks) {
+  const taskMap = new Map();
+
+  // Group tasks using Map
+  tasks.forEach(task => {
+    if (!taskMap.has(task.status)) {
+      taskMap.set(task.status, []);
+    }
+    taskMap.get(task.status).push(task);
+  });
+
+  // Convert Map to object and sort each group
+  return Object.fromEntries(
+    [...taskMap.entries()].map(([status, taskList]) => [
+      status,
+      taskList.sort((a, b) => a.priority - b.priority)
+    ])
+  );
+}
+
+
+console.log(sortAndGroupTasks(tasks));
