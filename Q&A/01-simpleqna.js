@@ -426,3 +426,23 @@ const tasks = [
 ];
 
 console.log(sortAndGroupTasks(tasks));
+
+
+// OR
+
+function sortAndGroupTasks(tasks) {
+  return tasks.reduce((acc, task) => {
+    // If the status doesn't exist, create an empty array
+    if (!acc[task.status]) {
+      acc[task.status] = [];
+    }
+    acc[task.status].push(task);
+
+    // Sort tasks within each group immediately
+    acc[task.status].sort((a, b) => a.priority - b.priority);
+
+    return acc;
+  }, {});
+}
+
+console.log(sortAndGroupTasks(tasks));
